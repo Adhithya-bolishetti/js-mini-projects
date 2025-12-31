@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Simple Calculator</title>
+        <style>
+            body {
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                text-align: center;
+                margin-top: 150px;
+            }
+            input {
+                width: 150px;
+                padding: 10px;
+                font-size: 18px;
+                margin: 10px;
+                text-align: center;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 18px;
+                margin: 5px;
+                border-radius: 10px;
+            }
+            h2 {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Simple Calculator</h1>
+
+        <input type="text" id="num1" placeholder="Number 1">
+        <input type="text" id="num2" placeholder="Number 2">
+        <br>
+
+        <button onclick="add()">+</button>
+        <button onclick="subtract()">-</button>
+        <button onclick="multiply()">x</button>
+        <button onclick="divide()">÷</button>
+        <button onclick="clearAll()">Clear</button>
+
+        <h2 id="result">Result :0</h2>
+
+        <script>
+            let resultText = document.getElementById("result");
+            
+
+            function getValues() {
+                let num1 = document.getElementById("num1").value.trim();
+                let num2 = document.getElementById("num2").value.trim();
+
+                if(num1 === "" || num2 === "") {
+                    resultText.innerHTML = "Please enter both values";
+                    return null;
+                }
+                
+                let a = Number(num1);
+                let b = Number(num2);
+
+                if(isNaN(a) || isNaN(b)) {
+                    resultText.innerHTML = "Please enter numbers only";
+                    return null;
+                }
+                return [a, b];
+            }
+
+            function add() {
+                let values = getValues();
+                if(!values) return;
+
+                let [a, b] = values;
+                resultText.innerHTML = "Result: " + (a + b);
+            }
+
+            function subtract() {
+                let values = getValues();
+                if(!values) return;
+
+                let [a, b] = values;
+                resultText.innerHTML = "Result: " + (a - b);
+            }
+
+            function multiply() {
+                let values = getValues();
+                if(!values) return;
+
+                let [a, b] = values;
+                resultText.innerHTML = "Result: " + (a * b);
+            }
+
+            function divide() {
+                let values = getValues();
+                if(!values) return;
+
+                let [a, b] = values;
+                if(b === 0) {
+                    resultText.innerHTML = "Cannot divide by zero";
+                }
+                else {
+                    resultText.innerHTML = "Result: " + (a / b);
+                }
+            }
+
+            function clearAll() {
+                document.getElementById("num1").value = "";
+                document.getElementById("num2").value = "";
+                resultText.innerHTML = "Result: 0";
+            }
+        </script>
+    </body>
+</html>
