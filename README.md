@@ -15,6 +15,10 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Increase, decrease, and reset counter value
 - Dynamic color change based on value
 - Demonstrates DOM manipulation and event handling
+### 2. Simple Calculator
+- Performs basic arithmetic operations
+- Handles input validation and error cases
+- Demonstrates function usage and numeric conversions
 
 ## How to Run
 1. Clone the repository
