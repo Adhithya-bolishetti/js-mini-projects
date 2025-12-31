@@ -16,13 +16,6 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Dynamic color change based on value
 - Demonstrates DOM manipulation and event handling
 
-## Folder Structure
-javascript-mini-projects/
-│
-├── counter-app/
-└── README.md
-
-
 ## How to Run
 1. Clone the repository
 2. Open any project folder
