@@ -23,6 +23,10 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Button-based calculator similar to mobile UI
 - Supports decimal values and operator precedence
 - Demonstrates string handling and expression evaluation
+### 4. To-Do List Application
+- Add, delete, and mark tasks as completed
+- Prevents empty task input
+- Demonstrates dynamic DOM creation and class manipulation
 
 ## How to Run
 1. Clone the repository
