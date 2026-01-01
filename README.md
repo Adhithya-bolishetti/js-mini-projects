@@ -19,6 +19,10 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Performs basic arithmetic operations
 - Handles input validation and error cases
 - Demonstrates function usage and numeric conversions
+### 3. Real Calculator UI
+- Button-based calculator similar to mobile UI
+- Supports decimal values and operator precedence
+- Demonstrates string handling and expression evaluation
 
 ## How to Run
 1. Clone the repository
