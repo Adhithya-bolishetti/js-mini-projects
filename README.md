@@ -27,6 +27,10 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Add, delete, and mark tasks as completed
 - Prevents empty task input
 - Demonstrates dynamic DOM creation and class manipulation
+### 5. Form Validation
+- Validates username, email, and password fields
+- Uses regular expressions for email validation
+- Prevents form submission on invalid input
 
 ## How to Run
 1. Clone the repository
