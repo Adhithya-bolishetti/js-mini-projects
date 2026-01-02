@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Countdown Timer</title>
+        <style>
+            body {
+                font-family:Arial, Helvetica, sans-serif;
+                background: #0f172a;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            h2 {
+                font-size: 40px;
+            }
+            .container {
+                background: #1e293b;
+                width: 350px;
+                padding: 30px;
+                border-radius: 10px;
+                text-align:center;
+            }
+            input {
+                border-radius: 50px;
+                font-size: 18px;
+                height: 30px;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            .time {
+                font-size: 40px;
+                font-weight: 600;
+                padding: 15px;
+                margin: 10px 0;
+            }
+            button {
+                font-size: 20px;
+                padding: 10px;
+                margin: 10px;
+                width: 80px;
+                border-radius: 50px;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Timer</h2>
+
+            <input type="number" id="minInput" placeholder="Enter minutes">
+            <div class="time" id="display">00:00</div>
+
+            <button class="start" onclick="start()">Start</button>
+            <button class="stop" onclick="stop()">Stop</button>
+            <button class="reset" onclick="reset()">Reset</button>
+        </div>
+        <script>
+            let totalSeconds = 0;
+            let timer = null;
+
+            function start() {
+                if(timer != null) return;
+
+                let minutes = Number(document.getElementById("minInput").value);
+
+                if(minutes <= 0 || isNaN(minutes)) {
+                    alert("Please enter a valid number of minutes");
+                    return;
+                }
+
+                totalSeconds = minutes * 60;
+                updateDisplay();
+
+                timer = setInterval(() => {
+                    totalSeconds--;
+
+                    updateDisplay();
+
+                    if(totalSeconds <= 0) {
+                        clearInterval(timer);
+                        timer = null;
+                        alert("Time is up!");
+                    }
+                },1000);
+            }
+
+            function stop() {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            function reset() {
+                stop();
+                totalSeconds = 0;
+                document.getElementById("display").textContent = "00:00";
+                document.getElementById("minInput").value = "";
+            }
+
+            function updateDisplay() {
+                let m = Math.floor(totalSeconds / 60);
+                let s = totalSeconds % 60;
+
+                m = m < 10 ? "0" + m : m;
+                s = s < 10 ? "0" + s : s;
+
+                document.getElementById("display").textContent = `${m}:${s}`;
+            }
+        </script>
+    </body>
+</html>
