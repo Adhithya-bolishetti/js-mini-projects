@@ -31,6 +31,11 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Validates username, email, and password fields
 - Uses regular expressions for email validation
 - Prevents form submission on invalid input
+### 6. Digital Clock
+- Displays the current time in hours, minutes, and seconds
+- Updates automatically every second using `setInterval()`
+- Uses the JavaScript `Date` object to fetch real-time system time
+- Formats time values with leading zeros for consistency
 
 ## How to Run
 1. Clone the repository
