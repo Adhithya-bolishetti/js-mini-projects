@@ -36,6 +36,11 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Updates automatically every second using `setInterval()`
 - Uses the JavaScript `Date` object to fetch real-time system time
 - Formats time values with leading zeros for consistency
+### 7. Stopwatch
+- Start, stop, and reset the stopwatch functionality
+- Displays time in minutes, seconds, and milliseconds
+- Uses `setInterval()` and `clearInterval()` for accurate time tracking
+- Prevents multiple timers from running simultaneously
 
 ## How to Run
 1. Clone the repository
