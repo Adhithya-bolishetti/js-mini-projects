@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz app</title>
+        <style>
+            body {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                background: #0f172a;
+                color: white;
+                display: flex;
+                justify-content: center;
+                height: 100vh;
+                align-items: center;
+            }
+            .container {
+                background: #1e293b;
+                width: 300px;
+                padding: 20px;
+                border-radius: 10px;
+            }
+            h2 {
+                margin-bottom: 20px;
+            }
+            .option {
+                background: #334155;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .option:hover {
+                background: #475569;
+            }
+            .option.selected {
+                background: #22c55e;
+                color: white;
+            }
+            button {
+                margin-top: 20px;
+                padding: 10px;
+                width: 100%;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2 id="question">Question</h2>
+
+            <div class="option" onclick="selectOpt(0)" id="opt0"></div>
+            <div class="option" onclick="selectOpt(1)" id="opt1"></div>
+            <div class="option" onclick="selectOpt(2)" id="opt2"></div>
+            <div class="option" onclick="selectOpt(3)" id="opt3"></div>
+
+            <button onclick="nextQuestion()">Next</button>
+            <h2 id="score"></h2>
+        </div>
+        <script>
+            const quiz = [
+                {
+                    question : "What does HTML stands for?",
+                    options : [
+                        "Hyper Text Markup Language",
+                        "High Text Machine Language",
+                        "Hyperlinks Text Mark Language",
+                        "None of the above"
+                    ],
+                    answer : 0
+                },
+                {
+                    question : "Which language runs in browser?",
+                    options : ["Java", "Python", "JavaScript", "C"],
+                    answer : 2
+                },
+                {
+                    question : "What is Vanilla JavaScript?",
+                    options : [
+                        "JavaScript framework",
+                        "Plain JavaScript",
+                        "JavaScript library",
+                        "CSS tool"
+                    ],
+                    answer : 1
+                }
+            ];
+
+            let currentQuestion = 0;
+            let score = 0;
+            let selectedOption = null;
+
+            function loadQuestion() {
+                let q = quiz[currentQuestion];
+                document.getElementById("question").textContent = q.question;
+
+                q.options.forEach((opt, index) => {
+                    document.getElementById("opt" + index).textContent = opt;
+                });
+                selectedOption = null;
+
+                document.querySelectorAll(".option").forEach(opt => {
+                    opt.classList.remove("selected");
+                });
+            }
+
+            function selectOpt(index) {
+                selectedOption = index;
+
+                document.querySelectorAll(".option").forEach(opt => {
+                    opt.classList.remove("selected");
+                });
+
+                document.getElementById("opt" + index).classList.add("selected");
+            }
+
+            function nextQuestion() {
+                if(selectedOption === null) {
+                    alert("Please select an option");
+                    return;
+                }
+
+                if(selectedOption === quiz[currentQuestion].answer) {
+                    score++;
+                }
+                currentQuestion++;
+
+                if(currentQuestion < quiz.length) {
+                    loadQuestion();
+                } else {
+                    showResult();
+                }
+            }
+
+            function showResult() {
+                document.querySelector(".container").innerHTML =
+                `<h2>Quiz completed</h2>
+                <p> Your score ${score} / ${quiz.length}</p>`;
+            }
+            loadQuestion();
+        </script>
+    </body>
+</html>
