@@ -47,6 +47,11 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Converts minutes into seconds for simplified time calculations
 - Uses `setInterval()` and `clearInterval()` for timer control
 - Includes input validation and reset functionality
+### 9. Quiz App
+- Displays multiple-choice questions dynamically
+- Tracks user answers and calculates final score
+- Uses arrays and objects to manage quiz data
+- Updates UI dynamically without page reload
 
 ## How to Run
 1. Clone the repository
