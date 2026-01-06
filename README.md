@@ -41,6 +41,12 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Displays time in minutes, seconds, and milliseconds
 - Uses `setInterval()` and `clearInterval()` for accurate time tracking
 - Prevents multiple timers from running simultaneously
+### 8. Countdown Timer
+- Allows users to set a countdown duration in minutes
+- Counts down in real time and updates every second
+- Converts minutes into seconds for simplified time calculations
+- Uses `setInterval()` and `clearInterval()` for timer control
+- Includes input validation and reset functionality
 
 ## How to Run
 1. Clone the repository
