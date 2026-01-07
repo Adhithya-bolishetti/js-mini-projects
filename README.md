@@ -52,6 +52,11 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Tracks user answers and calculates final score
 - Uses arrays and objects to manage quiz data
 - Updates UI dynamically without page reload
+### 10. Notes App
+- Allows users to add and delete notes
+- Saves notes using browser local storage
+- Automatically loads saved notes on page refresh
+- Demonstrates data persistence and dynamic DOM manipulation
 
 ## How to Run
 1. Clone the repository
