@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Expense tracker</title>
+        <style>
+            body {
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                background: #0f172a;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .tracker {
+                background: #1e293b;
+                width: 350px;
+                padding: 20px;
+                border-radius: 10px;
+            }
+            h2 {
+                text-align: center;
+            }
+            .balance {
+                font-size: 24px;
+                text-align: center;
+                margin: 10px 0;
+            }
+            input {
+                width: 93%;
+                padding: 10px;
+                margin: 8px 0;
+                font-size: 16px;
+                border-radius: 6px;
+            }
+            select {
+                width: 100%;
+                padding: 10px;
+                margin: 8px 0;
+                font-size: 16px;
+                border-radius: 6px;
+            }
+            button {
+                width: 100%;
+                font-size: 16px;
+                padding: 10px;
+                margin-top: 6px;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+            .list {
+                margin-top: 15px;
+            }
+            .item {
+                background: #334155;
+                padding: 10px;
+                margin-bottom: 8px;
+                display: flex;
+                justify-content: space-between;
+                border-radius: 6px;
+            }
+            .item.income {
+                border-left: 5px solid #22c55e;
+            }
+            .item.expense {
+                border-left: 5px solid #ef4444;
+            }
+            .delete {
+                background: red;
+                color: white;
+                width: 10%;
+                height: 30px;
+                border: none;
+                padding: 5px 8px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="tracker">
+            <h2>Expense Tracker</h2>
+
+            <div class="balance" id="balance" >Balance : ₹0</div>
+
+            <input type="text" id="text" placeholder="Enter description">
+            <input type="number" id="amount" placeholder="Enter amount">
+            <select id="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+
+            <button onclick="addTransaction()">Add Transaction</button>
+
+            <div class="list" id="list"></div>
+        </div>
+        <script>
+            let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+            const list = document.getElementById("list");
+            const balanceE1 = document.getElementById("balance");
+
+            function render() {
+                list.innerHTML = "";
+
+                transactions.forEach((t, index) => {
+                    let div = document.createElement("div");
+                    div.className = `item ${t.type}`;
+
+                    div.innerHTML = `
+                    <span>${t.text}</span>
+                    <span>${t.type === "income" ? "+" : "-"}₹${t.amount}</span>
+                    <button class="delete" onclick="deleteTransaction(${index})">X</button>`;
+                    list.appendChild(div);
+                });
+                updateBalance();
+            }
+
+            function updateBalance() {
+                let balance = transactions.reduce((total, t) => {
+                    return t.type === "income" ? total + t.amount : total - t.amount;
+                }, 0);
+                balanceE1.textContent = `Balance: ₹${balance}`;
+            }
+
+            function addTransaction() {
+                let text = document.getElementById("text").value.trim();
+                let amount = Number(document.getElementById("amount").value);
+                let type = document.getElementById("type").value;
+
+                if(text === "" || amount <= 0) {
+                    alert("Please enter valid details");
+                    return;
+                }
+
+                transactions.push({text, amount, type});
+                localStorage.setItem("transactions", JSON.stringify(transactions));
+
+                document.getElementById("text").value = "";
+                document.getElementById("amount").value = "";
+
+                render();
+            }
+
+            function deleteTransaction(index) {
+                transactions.splice(index, 1);
+                localStorage.setItem("transactions", JSON.stringify(transactions));
+                render();
+            }
+
+            render();
+        </script>
+    </body>
+</html>
