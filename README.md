@@ -62,6 +62,11 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Allows users to add and delete transactions
 - Uses local storage to persist data
 - Demonstrates array operations and dynamic DOM updates
+### 12. Weather App
+- Fetches real-time weather data using a public API
+- Displays temperature, weather condition, and humidity
+- Uses async/await and fetch for asynchronous operations
+- Handles invalid input and API errors gracefully
 
 ## How to Run
 1. Clone the repository
