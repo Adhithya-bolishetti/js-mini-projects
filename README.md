@@ -57,6 +57,11 @@ This repository contains a collection of JavaScript mini projects built from scr
 - Saves notes using browser local storage
 - Automatically loads saved notes on page refresh
 - Demonstrates data persistence and dynamic DOM manipulation
+### 11. Expense Tracker
+- Tracks income and expenses with real-time balance updates
+- Allows users to add and delete transactions
+- Uses local storage to persist data
+- Demonstrates array operations and dynamic DOM updates
 
 ## How to Run
 1. Clone the repository
