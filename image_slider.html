@@ -4,15 +4,79 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Image Slider</title>
+        <style>
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background:  #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slider {
+            width: 440px;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        button {
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
     </head>
     <body>
-        <div id="slider">
-            <img id="sliderImage" src="" alt="avengers">
+        <div class="slider">
+            <img id="sliderImage" src="" alt="Slider image">
 
             <div class="buttons">
                 <button onclick="prev()">❮</button>
                 <button onclick="next()">❯</button>
             </div>
         </div>
+        <script>
+            const images = [
+                "https://picsum.photos/id/1015/600/400",
+                "https://picsum.photos/id/1016/600/400",
+                "https://picsum.photos/id/1018/600/400",
+                "https://picsum.photos/id/1020/600/400"
+            ];
+
+            let index = 0;
+            const img = document.getElementById("sliderImage");
+
+            function showImage() {
+                img.src = images[index];
+            }
+
+            function next() {
+                index = (index + 1) % images.length;
+                showImage();
+            }
+            function prev() {
+                index = (index - 1 + images.length) % images.length;
+                showImage();
+            }
+            showImage();
+        </script>
     </body>
 </html>
