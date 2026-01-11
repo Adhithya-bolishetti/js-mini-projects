@@ -11,8 +11,8 @@ This repository contains a collection of JavaScript mini projects built from scr
 
 ## Projects Included
 
-### 1. Counter App
-### 2. Simple Calculator
+ 1. Counter App
+ 2. Simple Calculator
 ### 3. Real Calculator UI
 ### 4. To-Do List Application
 ### 5. Form Validation
