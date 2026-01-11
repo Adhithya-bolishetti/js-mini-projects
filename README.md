@@ -23,6 +23,7 @@ This repository contains a collection of JavaScript mini projects built from scr
 10. Notes App
 11. Expense Tracker
 12. Weather App
+13. Image Slider App
 
 ## How to Run
 1. Clone the repository
