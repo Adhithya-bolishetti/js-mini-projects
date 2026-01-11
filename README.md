@@ -11,18 +11,18 @@ This repository contains a collection of JavaScript mini projects built from scr
 
 ## Projects Included
 
- 1. Counter App
- 2. Simple Calculator
-### 3. Real Calculator UI
-### 4. To-Do List Application
-### 5. Form Validation
-### 6. Digital Clock
-### 7. Stopwatch
-### 8. Countdown Timer
-### 9. Quiz App
-### 10. Notes App
-### 11. Expense Tracker
-### 12. Weather App
+1. Counter App
+2. Simple Calculator
+3. Real Calculator UI
+4. To-Do List Application
+5. Form Validation
+6. Digital Clock
+7. Stopwatch
+8. Countdown Timer
+9. Quiz App
+10. Notes App
+11. Expense Tracker
+12. Weather App
 
 ## How to Run
 1. Clone the repository
