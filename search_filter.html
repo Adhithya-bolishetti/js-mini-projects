@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Search Filter app</title>
+        <style>
+            body {
+                font-family:'Times New Roman', Times, serif;
+                background: #0f172a;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .container {
+                background: #1e293b;
+                width: 350px;
+                padding: 20px;
+                text-align: center;
+                border-radius: 10px;
+            }
+            input {
+                font-size: 16px;
+                margin-bottom: 10px;
+                border-radius: 6px;
+                padding: 10px;
+            }
+            .item {
+                background: #334155;
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 6px;
+            }
+            .item.hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Search & Filter</h2>
+            <input type="text" id="searchInput" placeholder="Search items...">
+            <div id="list"></div>
+        </div>
+        <script>
+            const items = [
+                "JavaScript",
+                "Java",
+                "Python",
+                "C programming",
+                "C++",
+                "HTML",
+                "CSS",
+                "React",
+                "Angular",
+                "Node.js",
+                "Express.js"
+            ];
+
+            const searchInput = document.getElementById("searchInput");
+            const list = document.getElementById("list");
+
+            function renderList(data) {
+                list.innerHTML = "";
+
+                if(data.length === 0) {
+                    list.innerHTML = "<p>No results found</p>";
+                    return;
+                }
+
+                data.forEach(item => {
+                    const div = document.createElement("div");
+                    div.className = "item";
+                    div.textContent = item;
+                    list.appendChild(div);
+                });
+            }
+
+            searchInput.addEventListener("input", function() {
+                const searchText = searchInput.value.toLowerCase();
+
+                const filteredItems = items.filter(item =>
+                    item.toLowerCase().includes(searchText)
+                );
+
+                renderList(filteredItems);
+            });
+
+            renderList(items);
+        </script>
+    </body>
+</html>
