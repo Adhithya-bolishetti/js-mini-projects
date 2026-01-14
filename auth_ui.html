@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Authentication UI</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                background: #0f172a;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .container {
+                background: #1e293b;
+                width: 400px;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+            }
+            input {
+                font-size: 16px;
+                width: 92%;
+                padding: 10px;
+                margin-bottom: 10px;
+                text-align: center;
+                border-radius: 6px;
+            }
+            button {
+                font-size: 16px;
+                width: 98%;
+                padding: 10px;
+                margin-bottom: 8px;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+            .toggle {
+                text-align: center;
+                margin-top: 15px;
+                cursor: pointer;
+                color: #38bdf8;
+            }
+            .error {
+                font-size: 14px;
+                color: #f87171;
+            }
+            .success {
+                color: #22c55e;
+                text-align: center;
+                margin-top: 10px;
+            }
+            .hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <form id="loginForm">
+                <h2>Login</h2>
+
+                <input type="text" id="loginEmail" placeholder="Email">
+                <span class="error" id="loginEmailError"></span>
+
+                <input type="password" id="loginPassword" placeholder="Password">
+                <span class="error" id="loginPasswordError"></span>
+
+                <button type="submit">Login</button>
+
+                <div class="toggle" onclick="showSignup()">Don't have an account? Sign up</div>
+                <p class="success" id="loginSuccess"></p>
+            </form>
+
+            <form id="signupForm" class="hidden">
+                <h2>Sign Up</h2>
+
+                <input type="text" id="name" placeholder="Fullname">
+                <span class="error" id="nameError"></span>
+
+                <input type="text" id="signupEmail" placeholder="Email">
+                <span class="error" id="signupEmailError"></span>
+
+                <input type="text" id="phone" placeholder="Mobile Number">
+                <span class="error" id="phoneError"></span>
+
+                <input type="password" id="signupPassword" placeholder="Password">
+                <span class="error" id="signupPasswordError"></span>
+
+                <input type="password" id="confirmPassword" placeholder="Retype password">
+                <span class="error" id="confirmError"></span>
+
+                <button type="submit">Create Account</button>
+
+                <div class="toggle" onclick="showLogin()">Already have an account? Login</div>
+                <p class="success" id="signupSuccess"></p>
+            </form>
+        </div>
+        <script>
+            const loginForm = document.getElementById("loginForm");
+            const signupForm = document.getElementById("signupForm");
+
+            const loginEmailError = document.getElementById("loginEmailError");
+            const loginPasswordError = document.getElementById("loginPasswordError");
+            const loginSuccess = document.getElementById("loginSuccess");
+
+            const nameError = document.getElementById("nameError");
+            const signupEmailError = document.getElementById("signupEmailError");
+            const phoneError = document.getElementById("phoneError");
+            const signupPasswordError = document.getElementById("signupPasswordError");
+            const confirmError = document.getElementById("confirmError");
+            const signupSuccess = document.getElementById("signupSuccess");
+
+            function showLogin() {
+                signupForm.classList.add("hidden");
+                loginForm.classList.remove("hidden");
+            }
+
+            function showSignup() {
+                loginForm.classList.add("hidden");
+                signupForm.classList.remove("hidden");
+            }
+
+            loginForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                loginEmailError.textContent = "";
+                loginPasswordError.textContent = "";
+                loginSuccess.textContent = "";
+
+                const email = document.getElementById("loginEmail").value.trim();
+                const password = document.getElementById("loginPassword").value.trim();
+
+                let valid = true;
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (email === "") {
+                    loginEmailError.textContent = "Email is required";
+                    valid = false;
+                } else if (!emailPattern.test(email)) {
+                    loginEmailError.textContent = "Invalid email format";
+                    valid = false;
+                }
+
+                if (password === "") {
+                    loginPasswordError.textContent = "Password is required";
+                    valid = false;
+                }
+
+                if (valid) {
+                    loginSuccess.textContent = "Login successful";
+                    loginForm.reset();
+                }
+            });
+
+            signupForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                nameError.textContent = "";
+                signupEmailError.textContent = "";
+                phoneError.textContent = "";
+                signupPasswordError.textContent = "";
+                confirmError.textContent = "";
+                signupSuccess.textContent = "";
+
+                const nameValue = document.getElementById("name").value.trim();
+                const email = document.getElementById("signupEmail").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const password = document.getElementById("signupPassword").value;
+                const confirmPassword = document.getElementById("confirmPassword").value;
+
+                let valid = true;
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const phonePattern = /^[0-9]{10}$/;
+
+                if (nameValue === "") {
+                    nameError.textContent = "Name is required";
+                    valid = false;
+                }
+
+                if (email === "") {
+                    signupEmailError.textContent = "Email is required";
+                    valid = false;
+                } else if (!emailPattern.test(email)) {
+                    signupEmailError.textContent = "Invalid email format";
+                    valid = false;
+                }
+
+                if (phone === "") {
+                    phoneError.textContent = "Mobile number is required";
+                    valid = false;
+                } else if (!phonePattern.test(phone)) {
+                    phoneError.textContent = "Invalid mobile number format";
+                    valid = false;
+                }
+
+                if (password.length < 6) {
+                    signupPasswordError.textContent = "Password must be at least 6 characters";
+                    valid = false;
+                }
+
+                if (password !== confirmPassword) {
+                    confirmError.textContent = "Passwords do not match";
+                    valid = false;
+                }
+
+                if (valid) {
+                    signupSuccess.textContent = "Account created successfully";
+                    signupForm.reset();
+                    setTimeout(showLogin, 1500);
+                }
+            });
+        </script>
+    </body>
+</html>
