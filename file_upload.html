@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>File Upload</title>
+        <style>
+            body {
+                font-family: 'Times New Roman', Times, serif;
+                background: #0f172a;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .container {
+                background:  #1e293b;
+                width: 350px;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+            }
+            input[type="file"] {
+                margin:  15px 0;
+                font-size: 16px;
+                border-radius: 6px;
+                padding-left: 70px;
+            }
+            button {
+                padding: 10px;
+                width: 100%;
+                font-size: 16px;
+                margin-top: 10px;
+                cursor: pointer;
+                border-radius: 6px;
+            }
+            img {
+                max-width: 100%;
+                margin-top: 10px;
+                border-radius: 5px;
+                display: none;
+            }
+            .error {
+                color: #f87171;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Upload Profile Image</h2>
+
+            <input type="file" id="fileInput" accept="image/*">
+
+            <button onclick="uploadFile()">Upload</button>
+            <button onclick="clearFile()">Clear</button>
+
+            <img id="preview">
+            <p class="error" id="error"></p>
+        </div>
+        <script>
+            const fileInput = document.getElementById("fileInput");
+            const preview = document.getElementById("preview");
+            const error = document.getElementById("error");
+
+            function uploadFile() {
+                error.textContent = "";
+
+                const file = fileInput.files[0];
+
+                if(!file) {
+                    error.textContent = "Please upload a file";
+                    return;
+                }
+
+                if(!file.type.startsWith("image/")) {
+                    error.textContent = "Only images are allowed";
+                    return;
+                }
+
+                if(file.size > 2 * 1024 * 1024) {
+                    error.textContent = "Image size must be less than 2MB";
+                    return;
+                }
+
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = "block";
+            }
+
+            function clearFile() {
+                fileInput.value = "";
+                preview.src = "";
+                preview.style.display = "none";
+                error.textContent = "";
+            }
+        </script>
+    </body>
+</html>
