@@ -27,7 +27,10 @@ This repository contains a collection of JavaScript mini projects built from scr
 14. Search & Filter App
 15. Authentication UI
 16. Infinite scroll
-17. File Upload
+17. Drag & Drop
+18. File Upload
+19. Chat UI
+20. Modal & Toast
 
 ## How to Run
 1. Clone the repository
