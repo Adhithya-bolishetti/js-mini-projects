@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi Step Form</title>
+
+<style>
+    :root {
+        --bg: #f1f5f9;
+        --card: #ffffff;
+        --text: #000000;
+        --primary: #2563eb;
+        --muted: #cbd5f5;
+    }
+
+    body.dark {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --text: #ffffff;
+        --primary: #22c55e;
+        --muted: #334155;
+    }
+
+    body {
+        font-family: 'Times New Roman', Times, serif;
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background: var(--card);
+        width: 350px;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .toggle {
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: 15px;
+    }
+
+    .steps {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .step-indicator {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--muted);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .step-indicator.active,
+    .step-indicator.completed {
+        background: var(--primary);
+    }
+
+    .progress {
+        height: 6px;
+        background: var(--muted);
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: var(--primary);
+        transition: width 0.3s;
+    }
+
+    .step {
+        display: none;
+    }
+
+    .step.active {
+        display: block;
+    }
+
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: var(--primary);
+        color: white;
+        cursor: pointer;
+    }
+
+    .error {
+        display: block;
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #ef4444;
+        min-height: 18px; 
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="toggle" onclick="toggleDarkMode()">Dark Mode</div>
+
+    <div class="steps">
+        <div class="step-indicator active">1</div>
+        <div class="step-indicator">2</div>
+        <div class="step-indicator">3</div>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="step active">
+        <h2>Personal Info</h2>
+        <input type="text" id="name" placeholder="Full name">
+        <span class="error" id="nameError"></span>
+       <div class="buttons">
+            <button onclick="nextStep()">Next</button>
+       </div>
+    </div>
+
+    <div class="step">
+        <h2>Account Info</h2>
+        <input type="email" id="email" placeholder="Email">
+        <span class="error" id="emailError"></span>
+
+        <input type="password" id="password" placeholder="Password">
+        <span class="error" id="passwordError"></span>
+
+        <div class="buttons">
+            <button onclick="prevStep()">Back</button>
+            <button onclick="nextStep()">Next</button>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>Confirm</h2>
+        <p id="summary"></p>
+
+        <div class="buttons">
+            <button onclick="prevStep()">Back</button>
+            <button onclick="submitForm()">Submit</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const steps = document.querySelectorAll(".step");
+    const indicators = document.querySelectorAll(".step-indicator");
+    const progressBar = document.getElementById("progressBar");
+
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+    const summary = document.getElementById("summary");
+
+
+    let currentStep = 0;
+
+    function showStep(index) {
+        steps.forEach(step => step.classList.remove("active"));
+        steps[index].classList.add("active");
+
+        indicators.forEach((ind, i) => {
+            ind.classList.remove("active", "completed");
+            if (i < index) ind.classList.add("completed");
+            if (i === index) ind.classList.add("active");
+        });
+
+        progressBar.style.width =
+            (index / (steps.length - 1)) * 100 + "%";
+    }
+
+    function nextStep() {
+        if (!validateStep()) return;
+
+        if (currentStep < steps.length - 1) {
+            currentStep++;
+            showStep(currentStep);
+        }
+
+        if (currentStep === steps.length - 1) {
+            showSummary();
+        }
+    }
+
+    function prevStep() {
+        if (currentStep > 0) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    }
+
+
+    function validateStep() {
+        let valid = true;
+
+        if (currentStep === 0) {
+            nameError.textContent = "";
+            if (nameInput.value.trim() === "") {
+                nameError.textContent = "Name is required";
+                valid = false;
+            }
+        }
+
+        if (currentStep === 1) {
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            if (!email.value.includes("@")) {
+                emailError.textContent = "Invalid email";
+                valid = false;
+            }
+
+            if (password.value.length < 6) {
+                passwordError.textContent = "Password must be at least 6 characters";
+                valid = false;
+            }
+        }
+
+        return valid;
+    }
+
+    function showSummary() {
+        summary.innerHTML = `
+            <strong>Name:</strong> ${name.value}<br>
+            <strong>Email:</strong> ${email.value}
+        `;
+    }
+
+    function resetForm() {
+        nameInput.value = "";
+        emailInput.value = "";
+        passwordInput.value = "";
+
+        nameError.textContent = "";
+        emailError.textContent = "";
+        passwordError.textContent = "";
+
+        currentStep = 0;
+        showStep(currentStep);
+
+        progressBar.style.width = "0%";
+        summary.innerHTML = "";
+    }
+
+
+    function submitForm() {
+        alert("Form submitted successfully");
+        resetForm();
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark");
+        localStorage.setItem("darkMode", document.body.classList.contains("dark"));
+    }
+
+    if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark");
+    }
+</script>
+
+</body>
+</html>
