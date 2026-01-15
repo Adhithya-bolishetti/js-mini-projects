@@ -31,6 +31,7 @@ This repository contains a collection of JavaScript mini projects built from scr
 18. File Upload
 19. Chat UI
 20. Modal & Toast
+21. Navbar & Footer Layout
 
 ## How to Run
 1. Clone the repository
