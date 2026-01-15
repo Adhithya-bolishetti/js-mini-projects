@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modal & Toast</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: #0f172a;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                gap: 20px;
+            }
+            button {
+                padding: 10px 15px;
+                font-size: 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                border: none;
+            }
+            .overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.6);
+                display: none;
+                justify-content: center;
+                align-items: center;
+            }
+            .modal {
+                background: #1e293b;
+                width: 350px;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+            }
+            .toast {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #22c55e;
+                color: black;
+                padding: 10px 15px;
+                border-radius: 6px;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="openModal()">Open Modal</button>
+        <button onclick="showToast()">Show Toast</button>
+
+        <div class="overlay" id="overlay" onclick="closeModal()">
+            <div class="modal" onclick="event.stopPropagation()">
+                <h3>Modal Title</h3>
+                <p>This is a modal popup.</p>
+                <button onclick="closeModal()">Close</button>
+            </div>
+        </div>
+
+        <div class="toast" id="toast">Action successful</div>
+
+        <script>
+            const overlay = document.getElementById("overlay");
+            const toast = document.getElementById("toast");
+
+            function openModal() {
+                overlay.style.display = "flex";
+            }
+
+            function  closeModal() {
+                overlay.style.display = "none";
+            }
+
+            function showToast() {
+                toast.style.display = "block";
+
+                setTimeout(() => {
+                    toast.style.display = "none";
+                }, 2000);
+            }
+        </script>
+    </body>
+</html>
