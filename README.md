@@ -26,6 +26,7 @@ This repository contains a collection of JavaScript mini projects built from scr
 13. Image Slider App
 14. Search & Filter App
 15. Authentication UI
+16. Infinite scroll
 
 ## How to Run
 1. Clone the repository
