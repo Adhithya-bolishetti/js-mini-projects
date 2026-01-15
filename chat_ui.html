@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chat UI</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                background: #0f172a;
+                color: aliceblue;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .container {
+                background: #1e293b;
+                width: 400px;
+                padding: 20px;
+                height: 500px;
+                border-radius: 10px;
+                display: flex;
+                flex-direction:column;
+                overflow: hidden;
+            }
+            .header {
+                padding: 15px;
+                text-align: center;
+                background: #334155;
+                font-weight: bold;
+                margin-bottom: 15px;
+                border-radius: 6px;
+            }
+            .chat-messages {
+                flex: 1;
+                padding: 10px;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+            }
+            .message {
+                max-width: 70%;
+                padding: 8px 12px;
+                margin-bottom: 10px;
+                border-radius: 8px;
+                word-wrap: break-word;
+            }
+            .user {
+                background: #22c55e;
+                color: black;
+                align-self: flex-end;
+            }
+            .bot {
+                background: #475569;
+                align-self: flex-start;
+            }
+            .chat-input {
+                display: flex;
+                padding: 10px;
+                background: #334155;
+                border-radius: 10px;
+            }
+            input {
+                flex: 1;
+                padding: 10px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+            }
+            button {
+                padding: 10px;
+                margin-left: 5px;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">Chat UI</div>
+
+            <div class="chat-messages" id="messages"></div>
+
+            <div class="chat-input">
+                <input type="text" id="input" placeholder="Type a message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+        <script>
+            const messages = document.getElementById("messages");
+            const input = document.getElementById("input");
+
+            function addMessage(text, sender) {
+                const div = document.createElement("div");
+                div.className = `message ${sender}`;
+                div.textContent = text;
+                messages.appendChild(div);
+                messages.scrollTop = messages.scrollHeight;
+            }
+
+            function sendMessage() {
+                const text = input.value.trim();
+                if(text === "") return;
+
+                addMessage(text, "user");
+                input.value = "";
+
+                setTimeout(() => {
+                    addMessage("This is bot reply.","bot");
+                },800);
+            }
+
+            input.addEventListener("keypress", function (e) {
+                if(e.key === "Enter") {
+                    sendMessage();
+                }
+            });
+        </script>
+    </body>
+</html>
