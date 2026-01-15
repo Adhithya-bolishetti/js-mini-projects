@@ -24,6 +24,8 @@ This repository contains a collection of JavaScript mini projects built from scr
 11. Expense Tracker
 12. Weather App
 13. Image Slider App
+14. Search & Filter App
+15. Authentication UI
 
 ## How to Run
 1. Clone the repository
