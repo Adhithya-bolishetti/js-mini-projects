@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Infinite scroll</title>
+        <style>
+            body {
+                font-family: 'Times New Roman', Times, serif;
+                background: #0f172a;
+                color: white;
+                margin: 0;
+            }
+            h2 {
+                text-align: center;
+                padding: 15px;
+            }
+            .container {
+                max-width: 500px;
+                margin: auto;
+                padding: 10px;
+            }
+            .card {
+                background: #1e293b;
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 6px;
+            }
+            .loader {
+                text-align: center;
+                padding: 20px;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Infinite scroll</h2>
+
+        <div class="container" id="container"></div>
+        <div class="loader" id="loader">Loading...</div>
+        <script>
+            const container = document.getElementById("container");
+            const loader = document.getElementById("loader");
+
+            let page = 1;
+            const limit = 5;
+            const maxPages = 5;
+            let isLoading = false;
+
+            function loadData() {
+                if (isLoading || page > maxPages) return;
+                isLoading = true;
+
+                loader.style.display = "block";
+
+                setTimeout(() => {
+                    for (let i = 1; i <= limit; i++) {
+                        const div = document.createElement("div");
+                        div.className = "card";
+                        div.style.textAlign = "center";
+                        div.style.lineHeight = "15vh";
+                        div.textContent = `Item ${(page - 1) * limit + i}`;
+                        container.appendChild(div);
+                    }
+
+                    loader.style.display = "none";
+                    page++;
+                    isLoading = false;
+                }, 800);
+            }
+
+            window.addEventListener("scroll", () => {
+                const scrollTop = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const docHeight = document.documentElement.scrollHeight;
+
+                if(scrollTop + windowHeight >= docHeight - 10) {
+                    loadData();
+                }
+            });
+
+           window.onload = loadData;
+        </script>
+    </body>
+</html>
