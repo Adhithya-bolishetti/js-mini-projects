@@ -32,6 +32,7 @@ This repository contains a collection of JavaScript mini projects built from scr
 19. Chat UI
 20. Modal & Toast
 21. Navbar & Footer Layout
+22. Multi step form
 
 ## How to Run
 1. Clone the repository
