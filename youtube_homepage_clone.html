@@ -37,20 +37,38 @@
                 flex: 1;
                 display: flex;
                 justify-content: center;
+                align-items: center;
             }
             .search-box input {
-                width: 60%;
+                color: #0f0f0f;
+                width: 40%;
                 padding: 10px;
                 border-radius: 20px 0 0 20px;
                 font-size: 14px;
-                border: none;
+                background: none;
+                border: 1px solid #aaa;
             }
             .search-box button {
+                background: #aaa;
                 border: none;
                 border-radius: 0 20px 20px 0;
                 font-size: 14px;
-                padding: 10px 15px;
+                padding: 7px 20px;
                 cursor: pointer;
+                margin-right: 15px;
+            }
+            .search-box button img {
+                width: 20px;
+            }
+            .mic-btn button {
+                background: #aaa;
+                padding: 5px;
+                border-radius: 60px;
+                border: none;
+                cursor: pointer;
+            }
+            .mic-btn button img {
+                width: 25px;
             }
 
             .container {
@@ -167,7 +185,11 @@
 
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Search">
-                <button>Search</button>
+                <button><img src="./assets/search.png"></button>
+
+                <div class="mic-btn">
+                    <button><img src="./assets/voice.png"></button>
+                </div>
             </div>
         </div>
 
