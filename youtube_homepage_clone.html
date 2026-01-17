@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>YouTube</title>
+
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-family: 'Times New Roman', Times, serif;
+                background: #0f0f0f;
+                color: white;
+            }
+            .navbar {
+                height: 56px;
+                display: flex;
+                align-items: center;
+                padding: 35px 16px;
+                border-bottom: 1px solid #272727;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 100;
+                background: #0f0f0f;
+            }
+            .logo {
+                font-size: 20px;
+                font-weight: bold;
+                margin-right: 20px;
+            }
+            .search-box {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+            }
+            .search-box input {
+                width: 60%;
+                padding: 10px;
+                border-radius: 20px 0 0 20px;
+                font-size: 14px;
+                border: none;
+            }
+            .search-box button {
+                border: none;
+                border-radius: 0 20px 20px 0;
+                font-size: 14px;
+                padding: 10px 15px;
+                cursor: pointer;
+            }
+
+            .container {
+                display: flex;
+                margin-top: 56px;
+                height: calc(100vh - 56px);
+            }
+            .sidebar {
+                width: 250px;
+                padding: 10px;
+                border-right: 3px solid #272727;
+                height: 100%;
+                overflow-y: auto;
+            }
+            .sidebar div {
+                padding: 10px;
+                cursor: pointer;
+                border-radius: 6px;
+            }
+            .sidebar-top {
+                border-bottom: 1px solid #272727;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .sidebar-mid {
+                border-bottom: 1px solid #272727;
+            }
+            
+            .sidebar-top div:hover {
+                background: #272727;
+            }
+            .sidebar-mid div:hover {
+                background: #272727;
+            }
+            .sidebar-bottom div:hover {
+                background: #272727;
+            }
+            .side-bot-header {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .subscriptions {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .channels {
+                padding: 10px;
+                display: flex;
+            }
+            .channel-profile {
+                color: #0f0f0f;
+                background: white;
+                width: 30px;
+                border-radius: 100px;
+                margin-right: 10px;
+                padding: 15px;
+            }
+            .channel-name {
+                font-size: 14px;
+            }
+
+            .content {
+                flex: 1;
+                padding: 20px;
+                height: 100%;
+                overflow-y: auto;
+            }
+            .video-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+            }
+            .video-card {
+                background: #181818;
+                border-radius: 10px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: background 0.3s ease, transform 0.2s ease;
+            }
+            .video-card:hover {
+                background: #4e5079;
+                transform: translateY(-4px);
+            }
+            .video-card * {
+                pointer-events: none;
+            }
+            .thumbnail {
+                height: 160px;
+                background: #333;
+            }
+            .video-info {
+                padding: 10px;
+            }
+            .video-title {
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            .channel {
+                font-size: 13px;
+                color: #aaa;
+            }
+            .views {
+                font-size: 12px;
+                color: #aaa;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="logo">YouTube</div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search">
+                <button>Search</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="sidebar">
+                <div class="sidebar-top">
+                    <div class="home">Home</div>
+                    <div class="shorts">Shorts</div>
+                </div>
+
+                <div class="sidebar-mid">
+                    <div class="subscriptions">Subscriptions</div>
+                    <div class="channels">
+                        <div class="channel-profile"></div>
+                        <div class="channel-name">Great Learning</div>
+                    </div>
+
+                    <div class="channels">
+                        <div class="channel-profile"></div>
+                        <div class="channel-name">Feel Free to Learn</div>
+                    </div>
+
+                    <div class="channels">
+                        <div class="channel-profile"></div>
+                        <div class="channel-name">Apna College</div>
+                    </div>
+
+                    <div class="channels">
+                        <div class="channel-profile"></div>
+                        <div class="channel-name">Take U Forward</div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-bottom">
+                    <div class="side-bot-header">You</div>
+                    <div class="library">Library</div>
+                    <div class="history">History</div>
+                    <div class="settings">Settings</div>
+                    <div class="Help">Help</div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="video-grid">
+
+                    <div class="video-card">
+                        <div class="thumbnail"></div>
+                        <div class="video-info">
+                            <div class="video-title">JavaScript Tutorial</div>
+                            <div class="channel">Code bros</div>
+                            <div class="views">1.2M views | 1 year ago</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"></div>
+                        <div class="video-info">
+                            <div class="video-title">Java Tutorial</div>
+                            <div class="channel">Code bros</div>
+                            <div class="views">1.2M views | 1 year ago</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"></div>
+                        <div class="video-info">
+                            <div class="video-title">Python Tutorial</div>
+                            <div class="channel">Code bros</div>
+                            <div class="views">1.2M views | 1 year ago</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"></div>
+                        <div class="video-info">
+                            <div class="video-title">C++ Tutorial</div>
+                            <div class="channel">Code bros</div>
+                            <div class="views">1.2M views | 1 year ago</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"></div>
+                        <div class="video-info">
+                            <div class="video-title">C++ Tutorial</div>
+                            <div class="channel">Code bros</div>
+                            <div class="views">1.2M views | 1 year ago</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"></div>
+                        <div class="video-info">
+                            <div class="video-title">C++ Tutorial</div>
+                            <div class="channel">Code bros</div>
+                            <div class="views">1.2M views | 1 year ago</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"></div>
+                        <div class="video-info">
+                            <div class="video-title">C++ Tutorial</div>
+                            <div class="channel">Code bros</div>
+                            <div class="views">1.2M views | 1 year ago</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"></div>
+                        <div class="video-info">
+                            <div class="video-title">C++ Tutorial</div>
+                            <div class="channel">Code bros</div>
+                            <div class="views">1.2M views | 1 year ago</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"></div>
+                        <div class="video-info">
+                            <div class="video-title">C++ Tutorial</div>
+                            <div class="channel">Code bros</div>
+                            <div class="views">1.2M views | 1 year ago</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
