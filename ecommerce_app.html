@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>E-Commerce</title>
+        <style>
+            body {
+                font-family: 'Times New Roman', Times, serif;
+                background: #0f172a;
+                color: white;
+                padding: 20px;
+            }
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .container {
+                display: flex;
+                gap: 20px;
+            }
+            .products {
+                flex: 1;
+                background: #1e293b;
+                padding: 15px;
+                border-radius: 10px;
+            }
+            .cart {
+                flex: 1;
+                background: #1e293b;
+                padding: 15px;
+                border-radius: 10px;
+            }
+            .product, .cart-item {
+                background: #334155;
+                padding: 10px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+            .product button, .cart-item button {
+                margin-top: 8px;
+                padding: 6px 10px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+            .add-btn {
+                background: #22c55e;
+                color: black;
+            }
+            .remove-btn {
+                background: #ef4444;
+                color: white;
+            }
+            .qty-btn {
+                background: #64748b;
+                color: white;
+                margin: 0 5px;
+            }
+            .cart-total {
+                font-size: 18px;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>E-Commerce Cart</h1>
+        <div class="container">
+            <div class="products">
+                <h2>Products</h2>
+                <div id="productList"></div>
+            </div>
+
+            <div class="cart">
+                <h2>Cart</h2>
+                <div id="cartItems"></div>
+                <div class="cart-total" id="cartTotal">Total : ₹0</div>
+            </div>
+        </div>
+
+        <script>
+            const products = [
+                { id: 1, name: "Laptop", price: 70000 },
+                { id: 2, name: "Mobile", price: 30000 },
+                { id: 3, name: "Shirt", price: 800 },
+                { id: 4, name: "Watch", price: 2000 },
+                { id: 5, name: "Shoes", price: 2000 }
+            ];
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let productList = document.getElementById("productList");
+            let cartItems = document.getElementById("cartItems");
+            let cartTotal = document.getElementById("cartTotal");
+
+            function saveCart() {
+                localStorage.setItem("cart", JSON.stringify(cart));
+            }
+
+            function renderProducts() {
+                productList.innerHTML = "";
+                products.forEach(p => {
+                    const div = document.createElement("div");
+                    div.className = "product";
+                    div.innerHTML = `
+                        <h3>${p.name}</h3>
+                        <p>Price : ₹${p.price}</p>
+                        <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+                    `;
+                    productList.appendChild(div);
+                });
+            }
+
+            function addToCart(id) {
+                const item = cart.find(i => i.id === id);
+                if(item) {
+                    item.qty++;
+                } else {
+                    const product = products.find(p => p.id === id);
+                    cart.push({...product, qty: 1});
+                }
+                saveCart();
+                renderCart();
+            }
+
+            function removeFromCart(id) {
+                cart = cart.filter(item => item.id !== id);
+                saveCart();
+                renderCart();
+            }
+
+            function changeQty(id, amount) {
+                const item = cart.find(i => i.id === id);
+                item.qty += amount;
+                if(item.qty <= 0) {
+                    removeFromCart(id);
+                }
+                saveCart();
+                renderCart();
+            }
+
+            function renderCart() {
+                cartItems.innerHTML = "";
+
+                if(cart.length == 0) {
+                    cartItems.innerHTML = "<p>Cart is Empty</p>";
+                    cartTotal.textContent = "Total: ₹0";
+                    return;
+                }
+
+                let total = 0;
+
+                cart.forEach(item => {
+                    total += item.price * item.qty;
+
+                    const div = document.createElement("div");
+                    div.className = "cart-item";
+                    div.innerHTML = `
+                        <h4>${item.name}</h4>
+                        <p>₹${item.price} x ${item.qty}</p>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                        <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                    `;
+                    cartItems.appendChild(div);
+                });
+
+                cartTotal.textContent = `Total: ₹${total}`;
+            }
+
+            renderProducts();
+            renderCart();
+        </script>
+    </body>
+</html>
