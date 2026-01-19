@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Job Tracker</title>
+    </head>
+    <body>
+        <h1>Job Application Tracker</h1>
+
+        <form id="jobForm">
+            <input type="text" id="company" placeholder="Company Name">
+            <input type="text" id="role" placeholder="Job Role">
+            <input type="text" id="location" placeholder="Location">
+            <input type="date" id="date">
+            <input type="file" id="resume">
+
+            <select id="status">
+                <option value="applied">Applied</option>
+                <option value="interview">Interview</option>
+                <option value="offer">Offer</option>
+                <option value="rejected">Rejected</option>
+            </select>
+
+            <button type="submit">Add Job</button>
+        </form>
+
+        <div class="filters">
+            <select id="filterStatus">
+                <option value="all">All</option>
+                <option value="applied">Applied</option>
+                <option value="interview">Interview</option>
+                <option value="offer">Offer</option>
+                <option value="rejected">Rejected</option>
+            </select>
+
+            <input type="text" id="searchInput" placeholder="Search company or role">
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Role</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>Resume</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="jobList"></tbody>
+        </table>
+
+        <script src="script.js"></script>
+    </body>
+</html>
