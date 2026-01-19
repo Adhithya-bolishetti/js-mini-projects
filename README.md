@@ -35,6 +35,7 @@ This repository contains a collection of JavaScript mini projects built from scr
 22. Multi step form
 23. YouTube homepage clone
 24. E-Commerce Cart
+25. Job Tracker App
 
 ## How to Run
 1. Clone the repository
