@@ -1,0 +1,53 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background: #f4f6f8;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+}
+.board {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+.column {
+    background: #fff;
+    padding: 15px;
+    width: 350px;
+    border-radius: 10px;
+}
+.column h2 {
+    text-align: center;
+}
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    background: #007bff;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background: #0056b3;
+}
+.task-list {
+    min-height: 200px;
+}
+.task {
+    background: #e9ecef;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    cursor: grab;
+}
+.task.dragging {
+    opacity: 0.5;
+}
+.task button {
+    background: #dc3545;
+    margin-top: 8px;
+}
