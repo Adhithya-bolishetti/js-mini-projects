@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>API Dashboard</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>API Dashboard</h1>
+
+        <div class="dashboard">
+            <div class="card">
+                <h2>Weather</h2>
+                <input type="text" id="cityInput" placeholder="Enter city">
+                <button onclick="getWeather()">Get weather</button>
+                <p id="weatherResult"></p>
+            </div>
+
+            <div class="card">
+                <h2>GitHub profile</h2>
+                <input type="text" id="githubInput" placeholder="Enter GitHub username">
+                <button onclick="getGitHub()">Search</button>
+                <p id="githubResult"></p>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
